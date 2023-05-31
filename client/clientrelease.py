@@ -42,9 +42,7 @@ class UtilWindowUI(QtWidgets.QMainWindow, Ui_MainWindow):
         connect_thread.start()
 
     def start_connecting(self):
-        print("1")
         try:
-            print("2")
             self.c.datasocket.connect(("127.0.0.1", int(self.c.realAimPort)))
             sendbytes = json.dumps(self.c.message).encode('utf8')
             self.c.datasocket.send(sendbytes)
@@ -53,7 +51,6 @@ class UtilWindowUI(QtWidgets.QMainWindow, Ui_MainWindow):
             t = "收到了进程S返回的信息："+self.c.message["text"]+"\n"
             self.mysignal.emit(t)
         except ConnectionRefusedError:
-            print("3")
             self.mysignal.emit("ConnectionRefusedError\n")
 
     def myupdate(self,str):
